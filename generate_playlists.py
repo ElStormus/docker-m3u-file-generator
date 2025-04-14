@@ -1,7 +1,7 @@
 import os
 import time
 
-AUDIO_EXTENSIONS = ('.mp3', '.flac', '.ogg', '.wav', '.aac', '.m4a')
+AUDIO_EXTENSIONS = ('.mp3', '.flac', '.ogg', '.wav', '.aac', '.m4a', '.opus')
 
 def generate_m3u_for_directory(directory):
     playlist_name = os.path.basename(directory.rstrip("/")) + '.m3u'
