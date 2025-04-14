@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  playlist-generator:
+    image: stormimousse/playlist-generator:latest
+    container_name: m3u-file-generator
+
+    volumes:
+      - /path/to/music/folder:/music1
+      - /path/to/music/folder:/music2
+
+    environment:
+      - MUSIC_DIRS=/music1,/music2,
+      - SCAN_INTERVAL=3600
+
+    restart: unless-stopped
