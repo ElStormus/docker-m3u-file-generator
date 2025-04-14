@@ -1,6 +1,6 @@
 # 🎵 Docker M3U File Generator
 
-![Docker Pulls](https://img.shields.io/docker/pulls/elstormus/playlist-generator?style=flat-square)
+![Docker Pulls](https://img.shields.io/docker/pulls/stormimousse/docker-m3u-file-generator/?style=flat-square)
 ![CI](https://github.com/ElStormus/docker-m3u-file-generator/actions/workflows/docker.yml/badge.svg)
 
 This container automatically generates `.m3u` files in your music folders, which are scanned regularly.
