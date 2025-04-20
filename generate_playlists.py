@@ -1,10 +1,13 @@
 import os
 import time
+import logging
 
 AUDIO_EXTENSIONS = ('.mp3', '.flac', '.ogg', '.wav', '.aac', '.m4a', '.opus')
 
+logging.basicConfig(level=logging.INFO, format='[%(asctime)s] %(message)s')
+
 def generate_m3u_for_directory(directory):
-    playlist_name = os.path.basename(directory.rstrip("/")) + '.m3u'
+    playlist_name = os.path.basename(os.path.normpath(directory)) + '.m3u'
     playlist_path = os.path.join(directory, playlist_name)
 
     audio_files = [
@@ -19,26 +22,38 @@ def generate_m3u_for_directory(directory):
         for file in audio_files:
             m3u.write(f"{file}\n")
 
-    print(f"Created playlist : {playlist_path}")
+    logging.info(f"Created playlist : {playlist_path}")
     return True
 
 def walk_music_folder(root_music_folder):
     for root, _, _ in os.walk(root_music_folder):
         generate_m3u_for_directory(root)
 
+def get_music_dirs_from_mounts(base_dir="/"):
+    candidates = [os.path.join(base_dir, d) for d in os.listdir(base_dir)]
+    music_dirs = [d for d in candidates if os.path.isdir(d) and d.startswith("/music")]
+
+    logging.info(f"Dossiers montés détectés : {music_dirs}")
+    return music_dirs
+
 if __name__ == "__main__":
-    music_dirs = os.environ.get("MUSIC_DIRS", "/music").split(",")
     delay_seconds = int(os.environ.get("SCAN_INTERVAL", "3600"))
 
     while True:
-        print("Scanning...")
+        music_dirs = get_music_dirs_from_mounts()
+
+        if not music_dirs:
+            logging.warning("Aucun dossier monté trouvé commençant par /music*")
+
+        logging.info("Scanning...")
         for music_root in music_dirs:
-            if not os.path.isdir(music_root):
-                print(f"The directory does not exist:{music_root}")
-            else:
-                print(f"Scan of : {music_root}")
-                walk_music_folder(music_root)
-        
+            logging.info(f"Scan of : {music_root}")
+            walk_music_folder(music_root)
+
         delay_hours = delay_seconds / 3600
-        print(f"Wait {delay_hours:.2f} seconds before next scan...")
+        if delay_seconds < 3600:
+            logging.info(f"⏳ Attente de {delay_seconds} secondes avant le prochain scan...\n")
+        else:
+            logging.info(f"⏳ Attente de {delay_seconds / 3600:.2f} heures avant le prochain scan...\n")
+
         time.sleep(delay_seconds)
