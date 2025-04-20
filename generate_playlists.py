@@ -33,7 +33,7 @@ def get_music_dirs_from_mounts(base_dir="/"):
     candidates = [os.path.join(base_dir, d) for d in os.listdir(base_dir)]
     music_dirs = [d for d in candidates if os.path.isdir(d) and d.startswith("/music")]
 
-    logging.info(f"Dossiers montés détectés : {music_dirs}")
+    logging.info(f"Mounted files detected: {music_dirs}")
     return music_dirs
 
 if __name__ == "__main__":
@@ -43,7 +43,7 @@ if __name__ == "__main__":
         music_dirs = get_music_dirs_from_mounts()
 
         if not music_dirs:
-            logging.warning("Aucun dossier monté trouvé commençant par /music*")
+            logging.warning("Mounted folders detected: No mounted folders found starting with /music*.")
 
         logging.info("Scanning...")
         for music_root in music_dirs:
@@ -52,8 +52,8 @@ if __name__ == "__main__":
 
         delay_hours = delay_seconds / 3600
         if delay_seconds < 3600:
-            logging.info(f"⏳ Attente de {delay_seconds} secondes avant le prochain scan...\n")
+            logging.info(f"Wait {delay_seconds} seconds before next scan...\n")
         else:
-            logging.info(f"⏳ Attente de {delay_seconds / 3600:.2f} heures avant le prochain scan...\n")
+            logging.info(f"Wait {delay_seconds / 3600:.2f} hours before next scan...\n")
 
         time.sleep(delay_seconds)
