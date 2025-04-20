@@ -16,12 +16,13 @@ services:
     container_name: m3u-file-generator
 
     volumes:
-      - /path/to/music/folder:/music1
-      - /path/to/music/folder:/music2
+      - /path/to/music/folder1:/music1
+      - /path/to/music/folder2:/music2
+      - /path/to/music/folder3:/music3
+    # - /path/to/music/folderX:/musicX
 
     environment:
-      - MUSIC_DIRS=/music1,/music2,
-      - SCAN_INTERVAL=3600
+      - SCAN_INTERVAL=3600 # in seconds
 
     restart: unless-stopped
 ```
@@ -30,5 +31,4 @@ services:
 
 | Variable       | Mandatory   | Description                             | Default value     |
 |----------------|-------------|-----------------------------------------|-------------------|
-| `MUSIC_DIRS`   | ✅          | Internal paths to be scanned (commas)   | `/music`          |
 | `SCAN_INTERVAL`| ❌          | Time between scans (in seconds)         | `3600`            |
