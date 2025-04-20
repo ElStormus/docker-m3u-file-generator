@@ -5,6 +5,8 @@
 
 This container automatically generates `.m3u` files in your music folders, which are scanned regularly.
 
+🐳 https://hub.docker.com/r/stormimousse/docker-m3u-file-generator
+
 ## 🚀 Docker Compose
 
 ```yaml
