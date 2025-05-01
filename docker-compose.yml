@@ -4,14 +4,14 @@ services:
   playlist-generator:
     image: stormimousse/playlist-generator:latest
     container_name: m3u-file-generator
-
     volumes:
-      - /path/to/music/folder1:/music1
-      - /path/to/music/folder2:/music2
-      - /path/to/music/folder3:/music3
-    # - /path/to/music/folderX:/musicX
+      # Option 1: separate folders
+      - /path/to/music1:/music1
+      - /path/to/music2:/music2
 
+      # Option 2: single parent folder
+      - /path/to/all_playlists:/playlists
     environment:
-      - SCAN_INTERVAL=3600 # in seconds
-
+      - SCAN_INTERVAL=3600  # Scan interval in seconds
+      
     restart: unless-stopped
