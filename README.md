@@ -48,4 +48,4 @@ services:
 
 ## ✅ Compatibility
 
-This script works perfectly alongside the @pjmeca script, which is available here : https://github.com/pjmeca/spotify-downloader
+This script works perfectly alongside the @pjmeca script, which is available here : [Spotify-downloader](https://github.com/pjmeca/spotify-downloader)
