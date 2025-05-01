@@ -7,6 +7,17 @@ This container automatically generates `.m3u` files in your music folders, which
 
 🐳 https://hub.docker.com/r/stormimousse/docker-m3u-file-generator
 
+## 📝 Features
+
+- Automatically generates a `.m3u` playlist per folder.
+- Supports two modes:
+  1. **Multiple mounted folders** (e.g. `/music1`, `/music2`, etc.).
+  2. **Single parent folder containing subfolders** (e.g. `/playlists/Playlist1`, `/playlists/Playlist2`, etc.).
+- Recursively scans all subdirectories.
+- Runs continuously at a configurable interval.
+- Lightweight memory footprint.
+
+
 ## 🚀 Docker Compose
 
 ```yaml
@@ -16,15 +27,15 @@ services:
   playlist-generator:
     image: stormimousse/playlist-generator:latest
     container_name: m3u-file-generator
-
     volumes:
-      - /path/to/music/folder1:/music1
-      - /path/to/music/folder2:/music2
-      - /path/to/music/folder3:/music3
-    # - /path/to/music/folderX:/musicX
+      # Option 1: separate folders
+      - /path/to/music1:/music1
+      - /path/to/music2:/music2
 
+      # Option 2: single parent folder
+      - /path/to/all_playlists:/playlists
     environment:
-      - SCAN_INTERVAL=3600 # in seconds
+      - SCAN_INTERVAL=3600  # Scan interval in seconds
 
     restart: unless-stopped
 ```
