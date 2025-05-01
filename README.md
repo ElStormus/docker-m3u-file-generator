@@ -45,3 +45,7 @@ services:
 | Variable       | Mandatory   | Description                             | Default value     |
 |----------------|-------------|-----------------------------------------|-------------------|
 | `SCAN_INTERVAL`| ❌          | Time between scans (in seconds)         | `3600`            |
+
+## ✅ Compatibility
+
+This script works perfectly alongside the @pjmeca script, which is available here : https://github.com/pjmeca/spotify-downloader
