@@ -25,7 +25,7 @@ version: '3.9'
 
 services:
   playlist-generator:
-    image: stormimousse/playlist-generator:latest
+    image: stormimousse/docker-m3u-file-generator:latest
     container_name: m3u-file-generator
     volumes:
       # Option 1: separate folders
